@@ -1,4 +1,5 @@
 from copy import copy
+import string
 import sys
 import os
 import copy
@@ -7,20 +8,20 @@ import random
 
 
 class GenerateTestData:
-    def __init__(self, length=1000) -> None:
+    def __init__(self, length:int=1000) -> None:
         self.name = "Hello"
         self.length = length
         self.sortedArray = [x+1 for x in range(self.length)]
         self.array = copy.deepcopy(self.sortedArray)
         random.shuffle(self.array)
     
-    def getArray(self):
+    def getArray(self) -> list[int]:
         return self.array
     
-    def getSortedArray(self):
+    def getSortedArray(self) -> list[int]:
         return self.sortedArray
     
-    def exportArray(self, name="output"):
+    def exportArray(self, name:string="output") -> None:
         with open(name+".txt", 'w') as f:
             for i in range(self.length):
                 f.write(f"{self.array[i]}\n")
