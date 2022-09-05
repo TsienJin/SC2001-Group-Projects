@@ -21,6 +21,16 @@ class GenerateTestData:
     def getSortedArray(self) -> list[int]:
         return self.sortedArray
     
+    def validate(self, array:list) -> bool:
+        if(len(array) != self.length):
+            return False
+        
+        for i in range(self.length):
+            if(array[i] != self.sortedArray[i]):
+                return False
+            
+        return True
+    
     def exportArray(self, name:string="output") -> None:
         with open(name+".txt", 'w') as f:
             for i in range(self.length):
@@ -37,7 +47,8 @@ def main():
     test = GenerateTestData(10)
     print(test.array)
     print(test.sortedArray)
-    test.exportArray("outputTest")
+    # test.exportArray("outputTest")
+    # print(test.validate(test.array))
 
 
 
