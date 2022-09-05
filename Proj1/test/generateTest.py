@@ -1,7 +1,4 @@
 from copy import copy
-import string
-import sys
-import os
 import copy
 import random
 
@@ -31,7 +28,7 @@ class GenerateTestData:
             
         return True
     
-    def exportArray(self, name:string="output") -> None:
+    def exportArray(self, name:str="output") -> None:
         with open(name+".txt", 'w') as f:
             for i in range(self.length):
                 f.write(f"{self.array[i]}\n")
