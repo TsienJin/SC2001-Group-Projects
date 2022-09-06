@@ -53,11 +53,14 @@ def main():
     # print(test.validate(test.array))
     
     #Insertion Sort test
-    insertionStart = timeit.default_timer()
-    insertionSort(test.array) #Does insertion sort on the given array
-    insertionStop = timeit.default_timer()
-    print('Insertion Sort Time: ', insertionStop - insertionStart)  
-    print(test.validate(test.array))
+    # insertionStart = timeit.default_timer()
+    # insertionSort(test.array) #Does insertion sort on the given array
+    # insertionStop = timeit.default_timer()
+    # print('Insertion Sort Time: ', insertionStop - insertionStart)  
+    # print(test.validate(test.array))
+    
+    curData = GenerateTestData(length=100)
+    print(curData.array)
 
 
 
