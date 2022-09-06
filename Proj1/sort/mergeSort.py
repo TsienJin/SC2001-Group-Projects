@@ -15,5 +15,3 @@ class MergeSort:
     
     def sort(self) -> None:
         return 1
-    
-    
