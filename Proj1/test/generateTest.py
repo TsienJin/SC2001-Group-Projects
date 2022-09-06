@@ -1,8 +1,13 @@
+from array import array
 from copy import copy
 import copy
 import random
 
+#Importing Algorithms from a separate file
+from alg import *
 
+#Import a timer function to see runtime
+import timeit
 
 class GenerateTestData:
     def __init__(self, length:int=1000) -> None:
@@ -41,11 +46,18 @@ class GenerateTestData:
 
 
 def main():
-    test = GenerateTestData(10)
-    print(test.array)
-    print(test.sortedArray)
+    test = GenerateTestData(10000)
+    # print(test.array)
+    # print(test.sortedArray)
     # test.exportArray("outputTest")
     # print(test.validate(test.array))
+    
+    #Insertion Sort test
+    insertionStart = timeit.default_timer()
+    insertionSort(test.array) #Does insertion sort on the given array
+    insertionStop = timeit.default_timer()
+    print('Insertion Sort Time: ', insertionStop - insertionStart)  
+    print(test.validate(test.array))
 
 
 
