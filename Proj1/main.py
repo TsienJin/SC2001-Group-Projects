@@ -15,12 +15,17 @@ def main() -> None:
     
     # Insertion Sort on Generated Array
     doInsert = InsertSort(myArray.array)
-    
+    timeStartInsertSort = timeit.default_timer()
     doInsert.sort()
+    timeStopInsertSort = timeit.default_timer()
+    timeRuntimeInsertSort = timeStopInsertSort - timeStartInsertSort
+    
     print("The result of Insertion Sort is:\n{}".format(doInsert.array))
-    print("Validation check: {}".format(myArray.validate(doInsert.array)))
-    print("Number of Key comparisons done: {}\n"
-          "Number of Swaps done: {}".format(doInsert.comparison, doInsert.swaps))
+    print("Validation check: {}\n"
+          "Number of Key comparisons done: {}\n"
+          "Number of Swaps done: {}\n"
+          "Time Taken: {:.2f} ms"
+          .format(myArray.validate(doInsert.array), doInsert.comparison, doInsert.swaps, 1000 * (timeRuntimeInsertSort)))
 
 
     # Merge Sort on Generated Array
