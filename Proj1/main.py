@@ -10,8 +10,8 @@ def main() -> None:
     # pass
     
     # Generate an array
-    myArray = GenerateTestData(2)
-    print(myArray.array)
+    myArray = GenerateTestData(100)
+    print("Unsorted array:\n{}\n".format(myArray.array))
     
     # Insertion Sort on Generated Array
     doInsert = InsertSort(myArray.array)
