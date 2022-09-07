@@ -9,11 +9,11 @@ import copy
 class InsertSort:
     def __init__(self, array) -> None:
         self.name = "Insertion Sort"
-        self.array = array
+        self.array = copy.deepcopy(array)
         self.comparison = 0
         self.swaps = 0
         
-    def sort(self) -> None:
+    def insertionSort(self) -> None:
         arrayNum = len(self.array);     #Count number of elements in array
         if(arrayNum >= 1):              #Check if more than 1 element exists
             for i in range(1, arrayNum, 1):
@@ -25,6 +25,3 @@ class InsertSort:
     def swap(self, pos1, pos2) -> None:
         self.array[pos1], self.array[pos2] = self.array[pos2], self.array[pos1] #Swap 2 nodes
         self.swaps += 1
-    
-    def getArray(self) -> list[int]: #todo
-        return self.array
