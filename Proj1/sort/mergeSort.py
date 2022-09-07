@@ -1,54 +1,53 @@
+# Merge Sort
+# --------------
+# Input: Unsorted array
+# Output: Sorted array
+# Description: Sorts an array using merge sort. Worst case O(n lg n)
+import copy
 
-class MergeSort: 
-
+class MergeSort:
     def __init__(self, array) -> None:
-       self.name = "Merge Sort"
-       self.comparison = 0
-       self.swaps = 0
-       self.array = array
-       self.sort(array)
-       
-
-    def sort(self, arr) -> None:
-
-     if len(arr) > 1: 
-
-        #Findin the mid of the array
-        mid = len(arr) //2 
-
-        #Dividing the array into 2 halves 
-        L = arr[:mid]
-
-        R = arr[mid:]
-
-        #Sorting the first half
-        self.sort(L)
-
-        #Sorting the second half 
-        self.sort(R)
-
-        i = j = k = 0
+        self.name = "Merge Sort"
+        self.array = copy.deepcopy(array)
+    
+    def mergeSort(self, start, end) -> None:
+        mid = (start + end) // 2
+        if((end - start) <= 0):
+            return
+        elif((end - start) > 1):
+            self.mergeSort(start, mid)
+            self.mergeSort((mid+1), end)
+        self.sort(start, end)
+    
+    def sort(self, start, end) -> None:
+        if((end - start) <= 0):
+            return
+        mid = (start + end) // 2
         
-        #using temp array L and R, sort the elements back to arr
-        while i<len(L) and j < len(R):
-            if L[i] < R[j]:
-               arr[k] = L[i]
-               i += 1
-            
-            else: 
-                arr[k] = R[j]
-                j += 1
-                
-            k += 1
-           # self.comparison +=1
-
-        while i < len(L):
-            arr[k] = L[i]
-            i +=1
-            k +=1 
-
-        while j < len(R):
-            arr[k] = R[j]
-            j += 1
-            k += 1
+        firstList = []
+        secondList = []
+        
+        for i in range(start, mid + 1, 1):
+            firstList.insert(i, self.array.pop(start))
+        for i in range(mid + 1, end + 1, 1):
+            secondList.insert(i, self.array.pop(start))
+        pos = start
+        while(firstList and secondList):
+            if(firstList[0] < secondList[0]):
+                self.array.insert(pos, firstList.pop(0))
+            elif(secondList[0] < firstList[0]):
+                self.array.insert(pos, secondList.pop(0))
+            else:
+                self.array.insert(pos, firstList.pop(0))
+                pos += 1
+                self.array.insert(pos, secondList.pop(0))
+            pos += 1
+        if(firstList):
+            for j in firstList:
+                self.array.insert(pos, j)
+                pos += 1
+        elif(secondList):
+            for j in secondList:
+                self.array.insert(pos, j)
+                pos += 1
 
