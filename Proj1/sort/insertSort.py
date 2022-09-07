@@ -9,7 +9,7 @@ import copy
 class InsertSort:
     def __init__(self, array) -> None:
         self.name = "Insertion Sort"
-        self.array = copy.deepcopy(array)
+        self.array = array
         self.comparison = 0
         self.swaps = 0
         

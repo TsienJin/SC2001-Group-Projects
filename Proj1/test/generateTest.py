@@ -15,10 +15,10 @@ class GenerateTestData:
         random.shuffle(self.array)
     
     def getArray(self) -> list[int]:
-        return self.array
+        return copy.deepcopy(self.array)
     
     def getSortedArray(self) -> list[int]:
-        return self.sortedArray
+        return copy.deepcopy(self.sortedArray)
     
     def validate(self, array:list) -> bool:
         if(len(array) != self.length):
