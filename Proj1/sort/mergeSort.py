@@ -9,6 +9,7 @@ class MergeSort:
     def __init__(self, array) -> None:
         self.name = "Merge Sort"
         self.array = copy.deepcopy(array)
+        self.comparison = 0
     
     def mergeSort(self, start, end) -> None:
         mid = (start + end) // 2
@@ -33,6 +34,7 @@ class MergeSort:
             secondList.insert(i, self.array.pop(start))
         pos = start
         while(firstList and secondList):
+            self.comparison += 1
             if(firstList[0] < secondList[0]):
                 self.array.insert(pos, firstList.pop(0))
             elif(secondList[0] < firstList[0]):
