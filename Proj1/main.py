@@ -34,6 +34,31 @@ def main() -> None:
     # print("The result of Merge Sort is: {}".format(doMerge.array))
     # print("Validation check: {}".format(myArray.validate(doMerge.array)))
 
+    #DO INSERTION SORT AND PUT IN CSV FILE
+    
+    result = open("Proj1/result/result.csv", "w") # Overwrites file if exist, else creates new file
+    result.write("Size of Array, Insertion Sort Time (ms), Merge Sort Time (ms), Hybrid Sort Time (ms)\n")
+    result.close()
+    
+    for i in range(1000, 1010000, 10000):
+        testData = GenerateTestData(i)
+        
+        doInsert = InsertSort(testData.array)
+        timeStartInsertSort = timeit.default_timer()
+        doInsert.sort()
+        timeStopInsertSort = timeit.default_timer()
+        timeRuntimeInsertSort = 1000 * (timeStopInsertSort - timeStartInsertSort)
+        
+        print("The result of Insertion Sort is:\n{}".format(doInsert.array))
+        print("Validation check: {}\n"
+            "Number of Key comparisons done: {}\n"
+            "Number of Swaps done: {}\n"
+            "Time Taken: {:.2f} ms"
+            .format(myArray.validate(doInsert.array), doInsert.comparison, doInsert.swaps, timeRuntimeInsertSort))
+        
+        result = open("Proj1/result/result.csv", "a") # Writes the result to result.csv
+        result.write("{}, {}, {}, {}\n".format(i, timeRuntimeInsertSort, timeRuntimeInsertSort, timeRuntimeInsertSort))
+        result.close()
 
 
 if __name__ == "__main__":
