@@ -54,10 +54,10 @@ def main() -> None:
             "Number of Key comparisons done: {}\n"
             "Number of Swaps done: {}\n"
             "Time Taken: {:.2f} ms"
-            .format(myArray.validate(doInsert.array), doInsert.comparison, doInsert.swaps, timeRuntimeInsertSort))
+            .format(testData.validate(doInsert.array), doInsert.comparison, doInsert.swaps, timeRuntimeInsertSort))
         
         result = open("Proj1/result/result.csv", "a") # Writes the result to result.csv
-        result.write("{}, {}, {}, {}\n".format(i, timeRuntimeInsertSort, timeRuntimeInsertSort, timeRuntimeInsertSort))
+        result.write("{}, {:.2f}, {:.2f}, {:.2f}\n".format(i, timeRuntimeInsertSort, timeRuntimeInsertSort, timeRuntimeInsertSort))
         result.close()
 
 
