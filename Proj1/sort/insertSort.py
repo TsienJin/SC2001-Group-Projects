@@ -4,16 +4,14 @@
 # Output: Sorted array
 # Description: Sorts an array using insertion sort. Worst case O(n^2)
 
-import copy
-
 class InsertSort:
     def __init__(self, array) -> None:
         self.name = "Insertion Sort"
-        self.array = copy.deepcopy(array)
+        self.array = array
         self.comparison = 0
         self.swaps = 0
         
-    def insertionSort(self) -> None:
+    def sort(self) -> None:
         arrayNum = len(self.array);     #Count number of elements in array
         if(arrayNum >= 1):              #Check if more than 1 element exists
             for i in range(1, arrayNum, 1):
