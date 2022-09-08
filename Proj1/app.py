@@ -28,8 +28,9 @@ class SolveCompare():
     
         
     def compareInsertMerge(self) -> None:
-        for i in range(1000, 1010000, 10000): # generates arr from len 10,000 to 1,000,000 in incr. of 10,000
-            jitter = random.randrange(-999, 1001) # generates a jitter to further randomize data
+        for i in range(2, 50): # generates arr from len 10,000 to 1,000,000 in incr. of 10,000
+            # jitter = random.randrange(0, 100 ) # generates a jitter to further randomize data
+            jitter = 0
             testData = GenerateTestData(length=i+jitter)
             
             ### Creating sorting objects
@@ -42,11 +43,12 @@ class SolveCompare():
             timeMerge = self.calcTime(lambda: merge.sort())
             
             ### writing data to CSV file
-            self.writeResult(outputFile="./result/result_InsertMerge.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
+            self.writeResult(outputFile="./result/result_InsertMergeFocused.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
         
         pass
 
 
 
 if __name__ == '__main__':
-    SolveCompare().compareInsertMerge()
+    for i in range(100):
+        SolveCompare().compareInsertMerge()
