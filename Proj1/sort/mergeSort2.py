@@ -9,17 +9,17 @@ class MergeSort:
        self.sort(array)
        
 
-    def sort(self, arr) -> None:
+    def sort(self) -> None:
 
-     if len(arr) > 1: 
+     if len(self.array) > 1: 
 
         #Findin the mid of the array
-        mid = len(arr) //2 
+        mid = len(self.array) //2 
 
         #Dividing the array into 2 halves 
-        L = arr[:mid]
+        L = self.array[:mid]
 
-        R = arr[mid:]
+        R = self.array[mid:]
 
         #Sorting the first half
         self.sort(L)
@@ -29,26 +29,26 @@ class MergeSort:
 
         i = j = k = 0
         
-        #using temp array L and R, sort the elements back to arr
+        #using temp array L and R, sort the elements back to self.array
         while i<len(L) and j < len(R):
             if L[i] < R[j]:
-               arr[k] = L[i]
+               self.array[k] = L[i]
                i += 1
             
             else: 
-                arr[k] = R[j]
+                self.array[k] = R[j]
                 j += 1
                 
             k += 1
            # self.comparison +=1
 
         while i < len(L):
-            arr[k] = L[i]
+            self.array[k] = L[i]
             i +=1
             k +=1 
 
         while j < len(R):
-            arr[k] = R[j]
+            self.array[k] = R[j]
             j += 1
             k += 1
 
