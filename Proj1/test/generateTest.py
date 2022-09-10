@@ -57,18 +57,21 @@ def main():
     # print(test.validate(test.array))
     
     curData = GenerateTestData(length = 1000)
+    curData2 = copy.deepcopy(curData)
+    curData3 = copy.deepcopy(curData)
     #print(curData.array)
     mergeSort = MergeSort(curData.array)
     mergeSort.sort()
     #print(mergeSort.array)
-    print('MergeSort Comparisons: ' , mergeSort.comparison)
-    hybridSort = HybridSort(curData.array)
+    print('MergeSort Comparisons: ' , mergeSort.comparison, '\n')
+    #print(curData2.array, "\n")
+    hybridSort = HybridSort(curData2.array)
     hybridSort.sort()
     #print(hybridSort.array)
     print('HybridSort Key Comparisons: ' , hybridSort.comparison)
-    insertSort = InsertSort(curData.array)
+    insertSort = InsertSort(curData3.array)
     insertSort.sort()
-    print('Insert sort key comparison: ', insertSort.comparison)   
+    print('Insert sort key comparison: ', insertSort.comparison)
     
     
 
