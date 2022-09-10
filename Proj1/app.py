@@ -46,8 +46,16 @@ class SolveCompare():
             ### writing data to CSV file
             self.writeResult(outputFile="./result/result_InsertMergeFocused.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
         
-        pass
-    
+
+    def hybridNTesting(self) -> None:
+        for arrSize in range(2, 101):
+            for i in range (1, 9): # testing where N = i to determine best N
+                testData = GenerateTestData(length=arrSize)
+                hybrid = HybridSort(testData.getArray(), threshold=i)
+                timeHybrid = self.calcTime(lambda: hybrid.sort())
+                
+                self.writeResult(outputFile="./result/result_hybridAnalysis.csv", outputStr=f"\n{testData.length},{i},{timeHybrid},{hybrid.comparison}")
+            
     
     def compareInsertMergeHybridComparison(self) -> None:
         for i in range(2, 50):
@@ -73,5 +81,5 @@ class SolveCompare():
             
 
 if __name__ == '__main__':
-    for i in range(100):
-        SolveCompare().compareInsertMergeHybridComparison()
+    for i in range(1000):
+        SolveCompare().hybridNTesting()
