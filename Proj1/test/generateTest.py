@@ -59,6 +59,7 @@ def main():
     curData = GenerateTestData(length = 1000)
     #print(curData.array)
     mergeSort = MergeSort(curData.array)
+    mergeSort.sort()
     #print(mergeSort.array)
     print('MergeSort Comparisons: ' , mergeSort.comparison)
     hybridSort = HybridSort(curData.array)
