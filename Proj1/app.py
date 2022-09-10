@@ -67,8 +67,8 @@ class SolveCompare():
             ## writing data to CSV file
             # n,algo,time,comparisons
             self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},insert,{timeInsert},{insert.comparison}")
-            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},merge,{timeInsert},{merge.comparison}")
-            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},hybrid,{timeInsert},{hybrid.comparison}")
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},merge,{timeMerge},{merge.comparison}")
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},hybrid,{timeHybrid},{hybrid.comparison}")
             
             
 
