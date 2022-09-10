@@ -23,7 +23,7 @@ class HybridSort:
                         self.swaps += 1
 
     #function for swapping 2 elements 
-    def swap(array, pos1, pos2) -> None:
+    def swap(self, array, pos1, pos2) -> None:
         array[pos1], array[pos2] = array[pos2], array[pos1] #Swap 2 nodes
 
     #Hybrid sort (insertSort + mergeSort)
