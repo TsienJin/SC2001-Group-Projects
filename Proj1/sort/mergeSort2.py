@@ -43,7 +43,7 @@ class MergeSort:
                 j += 1
                 
             k += 1
-           # self.comparison +=1
+            self.comparison +=1
 
         while i < len(L):
             arr[k] = L[i]
