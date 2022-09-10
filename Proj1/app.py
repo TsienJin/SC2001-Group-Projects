@@ -5,6 +5,7 @@ import random
 from sort.insertSort import InsertSort
 # from sort.mergeSort import MergeSort
 from sort.mergeSort2 import MergeSort
+from sort.hybridSort import HybridSort
 from test.generateTest import GenerateTestData
 
 
@@ -46,9 +47,31 @@ class SolveCompare():
             self.writeResult(outputFile="./result/result_InsertMergeFocused.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
         
         pass
-
-
+    
+    
+    def compareInsertMergeHybridComparison(self) -> None:
+        for i in range(2, 50):
+            jitter = 0
+            testData = GenerateTestData(length=i+jitter)
+            
+            ### Creating sorting objects
+            insert = InsertSort(testData.getArray())
+            merge = MergeSort(testData.getArray())
+            hybrid = HybridSort(testData.getArray())
+            
+            ### time for sorting methods
+            timeInsert = self.calcTime(lambda: insert.sort())
+            timeMerge = self.calcTime(lambda: merge.sort())
+            timeHybrid = self.calcTime(lambda: hybrid.sort())
+            
+            ## writing data to CSV file
+            # n,algo,time,comparisons
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},insert,{timeInsert},{insert.comparison}")
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},merge,{timeInsert},{merge.comparison}")
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},hybrid,{timeInsert},{hybrid.comparison}")
+            
+            
 
 if __name__ == '__main__':
     for i in range(100):
-        SolveCompare().compareInsertMerge()
+        SolveCompare().compareInsertMergeHybridComparison()
