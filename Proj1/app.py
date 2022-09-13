@@ -65,7 +65,7 @@ class SolveCompare():
             ### Creating sorting objects
             insert = InsertSort(testData.getArray())
             merge = MergeSort(testData.getArray())
-            hybrid = HybridSort(testData.getArray())
+            hybrid = HybridSort(testData.getArray(), threshold=5)
             
             ### time for sorting methods
             timeInsert = self.calcTime(lambda: insert.sort())
@@ -82,4 +82,4 @@ class SolveCompare():
 
 if __name__ == '__main__':
     for i in range(1000):
-        SolveCompare().hybridNTesting()
+        SolveCompare().compareInsertMergeHybridComparison()
