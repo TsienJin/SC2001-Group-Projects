@@ -89,5 +89,12 @@ class SolveCompare():
 if __name__ == '__main__':
     # for i in range(1000):
     #     SolveCompare().compareInsertMergeHybridComparison()
-    for i in range(10000, 10000, 100001):
+    
+    result = open("Proj1/result/result_InsertMergeFocused10m.csv", "w") # Overwrites file if exist, else creates new file
+    result.close()
+    result = open("Proj1/result/result_hybridAnalysis10m.csv", "w") # Overwrites file if exist, else creates new file
+    result.close()
+    result = open("Proj1/result/result_InsertMergeHybridFocusedN_410m.csv", "w") # Overwrites file if exist, else creates new file
+    result.close()
+    for i in range(10000, 100001, 10000):
         SolveCompare().compareInsertMergeHybridComparison()
