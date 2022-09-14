@@ -44,7 +44,8 @@ class SolveCompare():
             timeMerge = self.calcTime(lambda: merge.sort())
             
             ### writing data to CSV file
-            self.writeResult(outputFile="./result/result_InsertMergeFocused.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
+            # self.writeResult(outputFile="./result/result_InsertMergeFocused.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
+            self.writeResult(outputFile="./result/result_InsertMergeFocused10m.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
         
 
     def hybridNTesting(self) -> None:
@@ -54,7 +55,8 @@ class SolveCompare():
                 hybrid = HybridSort(testData.getArray(), threshold=i)
                 timeHybrid = self.calcTime(lambda: hybrid.sort())
                 
-                self.writeResult(outputFile="./result/result_hybridAnalysis.csv", outputStr=f"\n{testData.length},{i},{timeHybrid},{hybrid.comparison}")
+                # self.writeResult(outputFile="./result/result_hybridAnalysis.csv", outputStr=f"\n{testData.length},{i},{timeHybrid},{hybrid.comparison}")
+                self.writeResult(outputFile="./result/result_hybridAnalysis10m.csv", outputStr=f"\n{testData.length},{i},{timeHybrid},{hybrid.comparison}")
             
     
     def compareInsertMergeHybridComparison(self) -> None:
@@ -74,12 +76,18 @@ class SolveCompare():
             
             ## writing data to CSV file
             # n,algo,time,comparisons
-            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},insert,{timeInsert},{insert.comparison}")
-            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},merge,{timeMerge},{merge.comparison}")
-            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},hybrid,{timeHybrid},{hybrid.comparison}")
+            # self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},insert,{timeInsert},{insert.comparison}")
+            # self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},merge,{timeMerge},{merge.comparison}")
+            # self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_4.csv", outputStr=f"\n{testData.length},hybrid,{timeHybrid},{hybrid.comparison}")
+            
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_410m.csv", outputStr=f"\n{testData.length},insert,{timeInsert},{insert.comparison}")
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_410m.csv", outputStr=f"\n{testData.length},merge,{timeMerge},{merge.comparison}")
+            self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_410m.csv", outputStr=f"\n{testData.length},hybrid,{timeHybrid},{hybrid.comparison}")
             
             
 
 if __name__ == '__main__':
-    for i in range(1000):
+    # for i in range(1000):
+    #     SolveCompare().compareInsertMergeHybridComparison()
+    for i in range(10000, 10000, 100001):
         SolveCompare().compareInsertMergeHybridComparison()
