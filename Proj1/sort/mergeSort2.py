@@ -3,10 +3,9 @@ class MergeSort:
 
     def __init__(self, array) -> None:
        self.name = "Merge _sort"
+       self.array = array
        self.comparison = 0
        self.swaps = 0
-       self.array = array
-    #    self._sort(array)
     
     def sort(self) -> None:
         self._sort(self.array)

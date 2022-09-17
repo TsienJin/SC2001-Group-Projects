@@ -1,11 +1,11 @@
 class HybridSort: 
 
     def __init__(self, array, threshold:int=4) -> None:
-       self.name = "Merge _sort"
-       self.comparison = 0
-       self.swaps = 0
-       self.array = array
-       self.threshold = threshold  #set threshold to observe changes in time complexity and key comparisons
+        self.name = "Hybrid sort"
+        self.comparison = 0
+        self.swaps = 0
+        self.array = array
+        self.threshold = threshold  #set threshold to observe changes in time complexity and key comparisons
 
     #self-calling method
     def sort(self) -> None:
