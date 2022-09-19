@@ -29,9 +29,9 @@ class SolveCompare():
     
         
     def compareInsertMerge(self) -> None:
-        for i in range(2, 50): # generates arr from len 10,000 to 1,000,000 in incr. of 10,000
-            # jitter = random.randrange(0, 100 ) # generates a jitter to further randomize data
-            jitter = 0
+        for i in range(50000, 1000000, 50000): # generates arr from len 10,000 to 1,000,000 in incr. of 10,000
+            jitter = random.randrange(0, 10000) # generates a jitter to further randomize data
+            print(f"Testing Array Size: {i+jitter}")
             testData = GenerateTestData(length=i+jitter)
             
             ### Creating sorting objects
@@ -45,7 +45,7 @@ class SolveCompare():
             
             ### writing data to CSV file
             # self.writeResult(outputFile="./result/result_InsertMergeFocused.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
-            self.writeResult(outputFile="./result/result_InsertMergeFocused10m.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
+            self.writeResult(outputFile="./result/result_InsertMerge.csv", outputStr=f"\n{testData.length},{timeInsert},{timeMerge}")
         
 
     def hybridNTesting(self) -> None:
@@ -87,14 +87,14 @@ class SolveCompare():
             
 
 if __name__ == '__main__':
-    # for i in range(1000):
-    #     SolveCompare().compareInsertMergeHybridComparison()
+    for i in range(1):
+        SolveCompare().compareInsertMerge()
     
-    result = open("Proj1/result/result_InsertMergeFocused10m.csv", "w") # Overwrites file if exist, else creates new file
-    result.close()
-    result = open("Proj1/result/result_hybridAnalysis10m.csv", "w") # Overwrites file if exist, else creates new file
-    result.close()
-    result = open("Proj1/result/result_InsertMergeHybridFocusedN_410m.csv", "w") # Overwrites file if exist, else creates new file
-    result.close()
-    for i in range(10000, 100001, 10000):
-        SolveCompare().compareInsertMergeHybridComparison()
+    # result = open("Proj1/result/result_InsertMergeFocused10m.csv", "w") # Overwrites file if exist, else creates new file
+    # result.close()
+    # result = open("Proj1/result/result_hybridAnalysis10m.csv", "w") # Overwrites file if exist, else creates new file
+    # result.close()
+    # result = open("Proj1/result/result_InsertMergeHybridFocusedN_410m.csv", "w") # Overwrites file if exist, else creates new file
+    # result.close()
+    # for i in range(10000, 100001, 10000):
+    #     SolveCompare().compareInsertMergeHybridComparison()
