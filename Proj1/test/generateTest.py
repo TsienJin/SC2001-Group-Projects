@@ -8,7 +8,6 @@ import timeit
 
 class GenerateTestData:
     def __init__(self, length:int=1000) -> None:
-        self.name = "Hello"
         self.length = length
         self.sortedArray = [x+1 for x in range(self.length)]
         self.array = copy.deepcopy(self.sortedArray)

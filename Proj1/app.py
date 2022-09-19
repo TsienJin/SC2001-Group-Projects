@@ -22,6 +22,9 @@ class SolveCompare():
         return (endTime-startTime)*1000 # returns time elapsed in ms
     
     def writeResult(self, outputFile:str="/result/output.txt", outputStr:str="") -> None:
+        
+        print(outputStr)
+        
         with open(outputFile, 'a') as f:
             f.write(outputStr)
         return
@@ -29,9 +32,11 @@ class SolveCompare():
     
         
     def compareInsertMerge(self) -> None:
-        for i in range(50000, 1000000, 50000): # generates arr from len 10,000 to 1,000,000 in incr. of 10,000
-            jitter = random.randrange(0, 10000) # generates a jitter to further randomize data
-            print(f"Testing Array Size: {i+jitter}")
+        # generates arr from len 10,000 to 1,000,000 in incr. of 10,000
+        for i in range(50000, 1000000, 50000): 
+            
+            # generates a jitter to further randomize data
+            jitter = random.randrange(0, 10000) 
             testData = GenerateTestData(length=i+jitter)
             
             ### Creating sorting objects
@@ -39,7 +44,6 @@ class SolveCompare():
             merge = MergeSort(testData.getArray())
 
             ### time for sorting methods
-            # timeForMethod = self.calcTime(lamda: method(testData.getArray()))
             timeInsert = self.calcTime(lambda: insert.sort())
             timeMerge = self.calcTime(lambda: merge.sort())
             
@@ -84,11 +88,28 @@ class SolveCompare():
             self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_410m.csv", outputStr=f"\n{testData.length},merge,{timeMerge},{merge.comparison}")
             self.writeResult(outputFile="./result/result_InsertMergeHybridFocusedN_410m.csv", outputStr=f"\n{testData.length},hybrid,{timeHybrid},{hybrid.comparison}")
             
+    def compareMergeHybrid(self) -> None:
+        for i in range(500000, 1000001, 4000): # iterates over size 100 to 1,000,000
+            jitter = random.randrange(-50, 50)
+            testData = GenerateTestData(length=i+jitter)
+            
+            ### Creating sorting objects
+            merge = MergeSort(testData.getArray())
+            hybrid = HybridSort(testData.getArray())
+            
+            ### Time the sorting
+            timeMerge = self.calcTime(lambda: merge.sort())
+            timeHybrid = self.calcTime(lambda: hybrid.sort())
+            
+            ### Record data
+            self.writeResult(outputFile="./result/result_MergeHybridLarge.csv", outputStr=f"\n{testData.length},merge,{timeMerge},{merge.comparison}")
+            self.writeResult(outputFile="./result/result_MergeHybridLarge.csv", outputStr=f"\n{testData.length},hybrid,{timeHybrid},{hybrid.comparison}")
+            
             
 
 if __name__ == '__main__':
     for i in range(1):
-        SolveCompare().compareInsertMerge()
+        SolveCompare().compareMergeHybrid()
     
     # result = open("Proj1/result/result_InsertMergeFocused10m.csv", "w") # Overwrites file if exist, else creates new file
     # result.close()
