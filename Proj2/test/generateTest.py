@@ -13,9 +13,6 @@ class GenerateTest():
         self.isDirectional = isDirectional
         self.adjMatrix = np.random.randint(0,2, (self.dimension, self.dimension)).tolist()
         
-        # house keeping for non-directional graphs
-
-        
         # number of vertecies and housekeeping for non-directional graphs
         self.edges = 0
         if(isDirectional):
