@@ -51,5 +51,5 @@ class GenerateTest():
                     toPrint += "{} ".format(j+1)
             print(toPrint)
         print("\nAdjacency Matrix:\n" + "=" * 10)
-        print('\n'.join(' '.join(str(x) for x in row) for row in self.adjMatrix))
+        print(self.__str__())
         
