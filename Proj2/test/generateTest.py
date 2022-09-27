@@ -12,6 +12,7 @@ class GenerateTest():
         self.dimension = dimension
         self.isDirectional = isDirectional
         self.adjMatrix = np.random.randint(0,2, (self.dimension, self.dimension)).tolist()
+        self.adjList = copy.deepcopy(self.adjMatrix)
         
         # number of vertecies and housekeeping for non-directional graphs
         self.edges = 0
@@ -30,7 +31,7 @@ class GenerateTest():
                 self.edges+=self.adjMatrix[i][i]
                 for j in range(i):
                     self.edges+=self.adjMatrix[i][j]
-                
+                    
     def __repr__(self) -> str:
         return f"G(V:{self.dimension}, E:{self.edges}) [Directional Graph = {self.isDirectional}]"
     
@@ -40,3 +41,15 @@ class GenerateTest():
     def getArjMatrix(self) -> list[list[int]]:
         return copy.deepcopy(self.adjMatrix)
     
+    # print both adjacent list and adjacent matrix
+    def printBoth(self) -> None:
+        print("\nAdjacency List:\n" + "=" * 10)
+        for i in range (len(self.adjList)):
+            toPrint = "{} -> ".format(i+1)
+            for j in range(len(self.adjList[i])):
+                if(self.adjList[i][j] > 0):
+                    toPrint += "{} ".format(j+1)
+            print(toPrint)
+        print("\nAdjacency Matrix:\n" + "=" * 10)
+        print('\n'.join(' '.join(str(x) for x in row) for row in self.adjMatrix))
+        
