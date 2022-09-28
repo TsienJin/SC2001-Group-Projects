@@ -7,11 +7,11 @@ import math
 class GenerateTest():
     
     # Constructor
-    def __init__(self, dimension:int=10, isDirectional:bool=False) -> None:
+    def __init__(self, dimension:int=10, isDirectional:bool=False, minWeight:int=0, maxWeight:int=9) -> None:
         # init values
         self.dimension = dimension
         self.isDirectional = isDirectional
-        self.adjMatrix = np.random.randint(0,2, (self.dimension, self.dimension)).tolist()
+        self.adjMatrix = np.random.randint(minWeight,maxWeight, (self.dimension, self.dimension)).tolist()
         self.adjList = copy.deepcopy(self.adjMatrix)
         
         # number of vertecies and housekeeping for non-directional graphs
