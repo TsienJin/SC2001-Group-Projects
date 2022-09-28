@@ -7,7 +7,7 @@ import math
 class GenerateTest():
     
     # Constructor
-    def __init__(self, dimension:int=10, isDirectional:bool=True) -> None:
+    def __init__(self, dimension:int=10, isDirectional:bool=False) -> None:
         # init values
         self.dimension = dimension
         self.isDirectional = isDirectional
