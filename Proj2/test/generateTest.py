@@ -12,7 +12,6 @@ class GenerateTest():
         self.dimension = dimension
         self.isDirectional = isDirectional
         self.adjMatrix = np.random.randint(minWeight,maxWeight, (self.dimension, self.dimension)).tolist()
-        self.adjList = copy.deepcopy(self.adjMatrix)
         
         # number of vertecies and housekeeping for non-directional graphs
         self.edges = 0
@@ -20,6 +19,8 @@ class GenerateTest():
             # Count edges
             for i in range(self.dimension):
                 for j in range(self.dimension):
+                    if(i == j): 
+                        self.adjMatrix[i][j] = 0 #for self- looping the  weight should equal 0 
                     self.edges+=self.adjMatrix[i][j]
         else:
             # Refactor adj matrix
@@ -31,6 +32,9 @@ class GenerateTest():
                 self.edges+=self.adjMatrix[i][i]
                 for j in range(i):
                     self.edges+=self.adjMatrix[i][j]
+
+        # make a copy of adjMatrix for adjList 
+        self.adjList = copy.deepcopy(self.adjMatrix)
                     
     def __repr__(self) -> str:
         return f"G(V:{self.dimension}, E:{self.edges}) [Directional Graph = {self.isDirectional}]"
