@@ -1,3 +1,4 @@
+
 import numpy as np
 import copy
 import math
@@ -12,6 +13,7 @@ class GenerateTest():
         self.dimension = dimension
         self.isDirectional = isDirectional
         self.adjMatrix = np.random.randint(minWeight,maxWeight, (self.dimension, self.dimension)).tolist()
+        self.adjList = {}
         
         # number of vertecies and housekeeping for non-directional graphs
         self.edges = 0
@@ -32,9 +34,10 @@ class GenerateTest():
                 self.edges+=self.adjMatrix[i][i]
                 for j in range(i):
                     self.edges+=self.adjMatrix[i][j]
+        
+        # convert matrix to list 
+        self.adjList = self.__matrixToList(self.adjMatrix)
 
-        # make a copy of adjMatrix for adjList 
-        self.adjList = copy.deepcopy(self.adjMatrix)
                     
     def __repr__(self) -> str:
         return f"G(V:{self.dimension}, E:{self.edges}) [Directional Graph = {self.isDirectional}]"
@@ -44,16 +47,30 @@ class GenerateTest():
 
     def getArjMatrix(self) -> list[list[int]]:
         return copy.deepcopy(self.adjMatrix)
+
+    #added adjMatrix -> list method 
+    def __matrixToList(self, matrix): 
+        adjList = {}
+        for i in range(self.dimension):
+            adjList[i] = []  
+        for i in range(self.dimension):
+            for j in range(self.dimension):
+                weight = self.adjMatrix[i][j]
+                if(weight >0):
+                    temp = [j, weight]
+                    adjList[i].append(temp)
+        
+        
+        return adjList
+
     
     # print both adjacent list and adjacent matrix
     def printBoth(self) -> None:
         print("\nAdjacency List:\n" + "=" * 10)
-        for i in range (len(self.adjList)):
-            toPrint = "{} -> ".format(i+1)
-            for j in range(len(self.adjList[i])):
-                if(self.adjList[i][j] > 0):
-                    toPrint += "{} ".format(j+1)
+        for v in self.adjList:
+            toPrint = "{} -> ".format(v)
+            for e in self.adjList[v]:
+                toPrint += "{} ".format(e)
             print(toPrint)
         print("\nAdjacency Matrix:\n" + "=" * 10)
         print(self.__str__())
-        
