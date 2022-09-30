@@ -15,12 +15,15 @@ class ArrayQueue():
 
     def insert(self, sourceNode:int, destNode:int, weight:int=0) -> None:
         self.queue.append(QueueEdge(sourceNode=sourceNode, destNode=destNode, weight=weight))
+        
+    def insertEdge(self, edge:QueueEdge):
+        self.queue.append(edge)
             
     
     # iterates over entire queue to find the lowest weightage edge
     # regardless of source edge
     def pop(self) -> QueueEdge:
-        if(~self.isEmpty()):
+        if(not self.isEmpty()):
             minEdge = self.queue[0] 
             for edge in self.queue:
                 if edge.weight < minEdge.weight:
@@ -42,5 +45,8 @@ class ArrayQueue():
                 if(edge.sourceNode==source and (minEdge==None or edge.weight<minEdge.weight)):
                     minEdge = edge
             
+        if(minEdge != None):
+            self.queue.remove(minEdge)
+        
         return minEdge
     
