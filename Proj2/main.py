@@ -1,5 +1,5 @@
-from GenerateTest import GenerateTest
-from ArrayQueue import ArrayQueue
+from test.generateTest import GenerateTest
+from algo.ArrayQueue import ArrayQueue
 
 def main():
     obj = GenerateTest(dimension=3, isDirectional=True)
