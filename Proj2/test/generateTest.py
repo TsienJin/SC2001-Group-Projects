@@ -16,15 +16,34 @@ class GenerateTest():
         self.adjList = {}
         
         # number of vertecies and housekeeping for non-directional graphs
-        self.edges = 0
-        if(isDirectional):
+        self.edges = self.__refactorAndCount()
+        
+        # convert matrix to list 
+        self.adjList = self.__matrixToList()
+        
+    #added adjMatrix -> list method 
+    def __matrixToList(self): 
+        adjList = {}
+        for i in range(self.dimension):
+            adjList[i] = []  
+        for i in range(self.dimension):
+            for j in range(self.dimension):
+                weight = self.adjMatrix[i][j]
+                if(weight >0):
+                    temp = [j, weight]
+                    adjList[i].append(temp)
+        return adjList
+    
+    def __refactorAndCount(self) -> int:
+        edges = 0
+        if(self.isDirectional):
             # Count edges
             for i in range(self.dimension):
                 for j in range(self.dimension):
                     if(i == j): 
                         self.adjMatrix[i][j] = 0 #for self- looping the  weight should equal 0 
                     if(self.adjMatrix[i][j] > 0):
-                        self.edges+=1
+                        edges+=1
         else:
             # Refactor adj matrix
             for i in range(self.dimension):
@@ -34,15 +53,13 @@ class GenerateTest():
                     self.adjMatrix[j][i] = self.adjMatrix[i][j]
             # Count edges
             for i in range(self.dimension):
-                self.edges+=self.adjMatrix[i][i]
+                edges+=self.adjMatrix[i][i]
                 for j in range(i):
                     if(self.adjMatrix[i][j] > 0):
-                        self.edges+=1
-        
-        # convert matrix to list 
-        self.adjList = self.__matrixToList(self.adjMatrix)
-
-                    
+                        edges+=1
+                        
+        return edges
+                
     def __repr__(self) -> str:
         return f"G(V:{self.dimension}, E:{self.edges}) [Directional Graph = {self.isDirectional}]"
     
@@ -54,21 +71,6 @@ class GenerateTest():
     
     def getAdjList(self):
         return copy.deepcopy(self.adjList)
-
-    #added adjMatrix -> list method 
-    def __matrixToList(self, matrix): 
-        adjList = {}
-        for i in range(self.dimension):
-            adjList[i] = []  
-        for i in range(self.dimension):
-            for j in range(self.dimension):
-                weight = self.adjMatrix[i][j]
-                if(weight >0):
-                    temp = [j, weight]
-                    adjList[i].append(temp)
-        
-        
-        return adjList
 
     
     # print both adjacent list and adjacent matrix

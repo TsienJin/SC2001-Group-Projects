@@ -8,14 +8,15 @@ def main():
     # obj.printBoth()
     
     # #create queue object
-    # queue = ArrayQueue()
+    queue = ArrayQueue()
 
     # #get adjList
-    # adjList = obj.getAdjList()
-    # #insert the edges of the 2nd node
-    # for i in adjList[1]:
-    #     temp = i
-    #     queue.insert(temp)
+    adjList = obj.getAdjList()
+    #insert the edges of the 2nd node
+    for i in adjList[1]:
+        temp = i
+        print(i)
+        queue.insert(temp)
     
     # print(queue)
     # #pop the node with the least weight
