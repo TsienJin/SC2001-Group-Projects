@@ -28,6 +28,8 @@ class GenerateTest():
             # Refactor adj matrix
             for i in range(self.dimension):
                 for j in range(self.dimension):
+                    if(i == j): 
+                        self.adjMatrix[i][j] = 0 #for self- looping the  weight should equal 0 
                     self.adjMatrix[j][i] = self.adjMatrix[i][j]
             # Count edges
             for i in range(self.dimension):
