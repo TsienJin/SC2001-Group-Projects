@@ -1,33 +1,46 @@
 
 
+from algo.Queue import QueueEdge
+
 
 class ArrayQueue():
     def __init__(self):
-      self.queue = list([])
+      self.queue = []
 
     def __str__(self):
-        return ' '.join([str(i) for i in self.queue])
+        return '\n'.join([str(i) for i in self.queue])
 
-    def isEmpty(self):
+    def isEmpty(self) -> bool:
         return len(self.queue) == 0
 
-    def insert(self, node):
-        self.queue.append(node)
+    def insert(self, sourceNode:int, destNode:int, weight:int=0) -> None:
+        self.queue.append(QueueEdge(sourceNode=sourceNode, destNode=destNode, weight=weight))
+            
     
-    #to pop, iterate over the queue array to find the node with the least weight, 
-    #for instance, self.queue[min] = (1,2), self.queue[i] = (2,1) 
-    #since self.queue[min][1] = 2 > self.queue[i][1] = 1
-    #min = i
-    def pop(self):
+    # iterates over entire queue to find the lowest weightage edge
+    # regardless of source edge
+    def pop(self) -> QueueEdge:
         if(~self.isEmpty()):
-            min_mode = 0 
-            for i in range(len(self.queue)):
-                if self.queue[i][1] < self.queue[min_mode][1]:
-                    min_mode = i
-            item = self.queue[min_mode]
-            del self.queue[min_mode]
-            return item
+            minEdge = self.queue[0] 
+            for edge in self.queue:
+                if edge.weight < minEdge.weight:
+                    minEdge = edge
+            self.queue.remove(minEdge)
+            return minEdge
         
         else: 
-            return 0
+            return None
+        
+    # iterates over entire queue to find the lowest weightage edge
+    # with respect to source edge
+    def popFrom(self, source:int):
+        
+        minEdge = None
+        
+        if(not self.isEmpty()):
+            for edge in self.queue:
+                if(edge.sourceNode==source and (minEdge==None or edge.weight<minEdge.weight)):
+                    minEdge = edge
+            
+        return minEdge
     
