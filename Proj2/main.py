@@ -23,7 +23,7 @@ def main():
     
     print("\nArray")
     print("+"*10)
-    dijk = DSearch(graph=obj, useHeapAndList=False)
+    dijk = DSearch(graph=obj, useHeapAndList=True)
     dijk.solve()
     dijk.printMST()
     

@@ -1,5 +1,5 @@
 from algo.ArrayQueue import ArrayQueue
-from algo.HeapQueue import HeapQueue
+# from algo.HeapQueue import HeapQueue
 from algo.Queue import QueueEdge
 from test.generateTest import GenerateTest
 
@@ -22,7 +22,7 @@ class DSearch():
         
         
         if(useHeapAndList):
-            self.queue = HeapQueue()
+            self.queue = ArrayQueue()
         else:
             self.queue = ArrayQueue()
         
@@ -30,12 +30,12 @@ class DSearch():
     ### PUBLIC CALLABLE METHODS
         
     def solve(self) -> bool:
-        # self.__dArray()
+        self.__dArray()
 
-        if(self.useHeapAndList):
-            self.__dHeap()
-        else:
-            self.__dArray()
+        # if(self.useHeapAndList):
+        #     self.__dHeap()
+        # else:
+        #     self.__dArray()
 
     
     
