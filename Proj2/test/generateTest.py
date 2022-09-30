@@ -28,7 +28,7 @@ class GenerateTest():
             adjList[i] = []  
         for i in range(self.dimension):
             for j in range(self.dimension):
-                weight = self.adjMatrix[i][j]
+                weight = self.adjMatrix[i][j] ## from row to column
                 if(weight >0):
                     temp = [j, weight]
                     adjList[i].append(temp)
