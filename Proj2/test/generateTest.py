@@ -23,7 +23,8 @@ class GenerateTest():
                 for j in range(self.dimension):
                     if(i == j): 
                         self.adjMatrix[i][j] = 0 #for self- looping the  weight should equal 0 
-                    self.edges+=self.adjMatrix[i][j]
+                    if(self.adjMatrix[i][j] > 0):
+                        self.edges+=1
         else:
             # Refactor adj matrix
             for i in range(self.dimension):
@@ -35,7 +36,8 @@ class GenerateTest():
             for i in range(self.dimension):
                 self.edges+=self.adjMatrix[i][i]
                 for j in range(i):
-                    self.edges+=self.adjMatrix[i][j]
+                    if(self.adjMatrix[i][j] > 0):
+                        self.edges+=1
         
         # convert matrix to list 
         self.adjList = self.__matrixToList(self.adjMatrix)
@@ -47,8 +49,11 @@ class GenerateTest():
     def __str__(self) -> str:
         return '\n'.join(' '.join(str(x) for x in row) for row in self.adjMatrix)
 
-    def getArjMatrix(self) -> list[list[int]]:
+    def getAdjMatrix(self) -> list[list[int]]:
         return copy.deepcopy(self.adjMatrix)
+    
+    def getAdjList(self):
+        return copy.deepcopy(self.adjList)
 
     #added adjMatrix -> list method 
     def __matrixToList(self, matrix): 

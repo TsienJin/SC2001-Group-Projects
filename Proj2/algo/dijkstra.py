@@ -1,7 +1,7 @@
 import numpy as np
 
 class DSearch():
-    def __init__(self, adjMatrix:list[list[int]]=[[]], useHeap:bool=True):
+    def __init__(self, adjMatrix:list[list[int]]=[[]], useHeap:bool=True, startNode:int=0):
         self.adjMatrix = adjMatrix
         self.useHeap = useHeap
         self.distNode = []
@@ -17,7 +17,7 @@ class DSearch():
         pass
     
     def dijkstra(self) -> None:
-        srcNode = 0;
+        srcNode = 0
         for i in range(len(self.adjMatrix)):
             self.distNode[i] = np.inf
             self.predecessor[i] = -1
