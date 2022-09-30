@@ -1,4 +1,5 @@
 from algo.ArrayQueue import ArrayQueue
+from algo.HeapQueue import HeapQueue
 from algo.Queue import QueueEdge
 from test.generateTest import GenerateTest
 
@@ -21,24 +22,20 @@ class DSearch():
         
         
         if(useHeapAndList):
-            self.queue = ArrayQueue()
+            self.queue = HeapQueue()
         else:
             self.queue = ArrayQueue()
-        
-        
-        # self.tempQueue = [] #REMOVE LATER
-        # self.bfsQueue = [] #REMOVE LATER
         
         
     ### PUBLIC CALLABLE METHODS
         
     def solve(self) -> bool:
-        self.__dArray()
+        # self.__dArray()
 
-        # if(self.useHeapAndList):
-        #     self.__dHeap()
-        # else:
-        #     self.__dArray()
+        if(self.useHeapAndList):
+            self.__dHeap()
+        else:
+            self.__dArray()
 
     
     
@@ -72,7 +69,22 @@ class DSearch():
     ### Dijkstra methods
     
     def __dHeap(self) -> None:
-        pass
+        # init arrays for starting node
+        self.distFromStart[self.startNode] = 0
+        self.visited[self.startNode] = True
+        
+        # add starting node to the queue
+        curNode = self.startNode
+        self.__insertAdjNodesToQueueFrom(curNode)
+        
+        
+        while not self.queue.isEmpty():
+            nextEdge = self.queue.pop()
+            self.visited[nextEdge.sourceNode] = True
+            if(self.visited[nextEdge.destNode] == False):
+                self.distFromStart[nextEdge.destNode] = self.distFromStart[nextEdge.sourceNode] + nextEdge.weight
+                self.path.append(nextEdge.destNode)
+                self.__insertAdjNodesToQueueFrom(nextEdge.destNode)
     
     def __dArray(self) -> None:
         # init arrays for starting node

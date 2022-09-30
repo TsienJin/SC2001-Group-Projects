@@ -21,9 +21,17 @@ def main():
     # print("Lowest node with source 0:")
     # print(queue.popFrom(source=0))
     
-    dijk = DSearch(graph=obj, useHeapAndList=True)
+    print("\nArray")
+    print("+"*10)
+    dijk = DSearch(graph=obj, useHeapAndList=False)
     dijk.solve()
     dijk.printMST()
+    
+    print("\nHeap")
+    print("+"*10)
+    dijk1 = DSearch(graph=obj, useHeapAndList=False)
+    dijk1.solve()
+    dijk1.printMST()
     
 if __name__ == '__main__':
     main()
