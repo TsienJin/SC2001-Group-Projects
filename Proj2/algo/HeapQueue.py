@@ -7,6 +7,7 @@ class HeapQueue():
     def __str__(self):
         return '\n'.join([str(i) for i in self.queue])
     
+    
     def isEmpty(self):
         return len(self.queue) == 0
     
