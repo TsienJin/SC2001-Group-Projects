@@ -1,5 +1,5 @@
 from algo.ArrayQueue import ArrayQueue
-# from algo.HeapQueue import HeapQueue
+from algo.HeapQueue import HeapQueue
 from algo.Queue import QueueEdge
 from test.generateTest import GenerateTest
 
@@ -12,7 +12,7 @@ class DSearch():
         self.startNode = startNode
         self.path = [self.startNode]
         
-        # shortest path tree (SPT) set = self.visited
+        # shortest path tree (SPT) set = self.visited  
         # keeps track of vertices that are included into the SPT
         # when the values are finalised
         self.visited = [False] * self.graph.dimension
@@ -22,7 +22,7 @@ class DSearch():
         
         
         if(useHeapAndList):
-            self.queue = ArrayQueue()
+            self.queue = HeapQueue()
         else:
             self.queue = ArrayQueue()
         

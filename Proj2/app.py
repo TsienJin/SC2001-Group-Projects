@@ -23,7 +23,7 @@ class Compare():
         return
     
     def compareLargeRangeUndirected(self) -> None:
-        for i in range(1, 100):
+        for i in range(1, 60):
             jitter = 0
             localDim = i+jitter
             minWeight=0
