@@ -30,12 +30,10 @@ class DSearch():
     ### PUBLIC CALLABLE METHODS
         
     def solve(self) -> bool:
-        self.__dArray()
-
-        # if(self.useHeapAndList):
-        #     self.__dHeap()
-        # else:
-        #     self.__dArray()
+        if(self.useHeapAndList):
+            self.__dHeap()
+        else:
+            self.__dArray()
 
     
     
@@ -56,12 +54,16 @@ class DSearch():
         if(self.useHeapAndList):
             return self.adjList[source]
         else:
-            return self.adjList[source]
+            # maps from row to col
+            edgesFromSource = []
+            for i in range(self.graph.dimension):
+                if(self.graph.adjMatrix[source][i] > 0):
+                    edgesFromSource.append([i, self.graph.adjMatrix[source][i]])
+            return edgesFromSource
         
     def __insertAdjNodesToQueueFrom(self, source:int) -> None:
-        if(self.useHeapAndList):
-            for edge in self.__getEdgesFrom(source):
-                self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1])
+        for edge in self.__getEdgesFrom(source):
+            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1])
     
     
     
