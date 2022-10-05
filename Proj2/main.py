@@ -8,13 +8,13 @@ def debug():
     
     print("\nArray")
     print("+"*10)
-    dijk = DSearch(graph=obj, useHeapAndList=False)
+    dijk = DSearch(graph=obj, useHeap=False, useAdjList=False)
     dijk.solve()
     dijk.printMST()
     
     print("\nHeap")
     print("+"*10)
-    dijk1 = DSearch(graph=obj, useHeapAndList=True)
+    dijk1 = DSearch(graph=obj, useHeap=True, useAdjList=True)
     dijk1.solve()
     dijk1.printMST()
     

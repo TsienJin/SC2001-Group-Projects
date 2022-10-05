@@ -33,8 +33,8 @@ class Compare():
             print(repr(testGraph))
             
             # create searching objects
-            dHeapNList = DSearch(graph=testGraph, useHeapAndList=True)
-            dNormal = DSearch(graph=testGraph, useHeapAndList=False)
+            dHeapNList = DSearch(graph=testGraph, useHeap=True, useAdjList=True)
+            dNormal = DSearch(graph=testGraph, useHeap=False, useAdjList=False)
             
             # timing each item
             timeHNL = self.__timeIt(lambda: dHeapNList.solve())

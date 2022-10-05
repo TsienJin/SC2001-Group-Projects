@@ -4,11 +4,12 @@ from algo.Queue import QueueEdge
 from test.generateTest import GenerateTest
 
 class DSearch():
-    def __init__(self, graph:GenerateTest, useHeapAndList:bool=False, startNode:int=0) -> None:
+    def __init__(self, graph:GenerateTest, startNode:int=0, useHeap:bool=False, useAdjList:bool=False) -> None:
         self.graph = graph
         self.adjMatrix = self.graph.adjMatrix
         self.adjList = self.graph.adjList
-        self.useHeapAndList = useHeapAndList
+        self.useAdjList = useAdjList
+        self.useHeap = useHeap
         self.startNode = startNode
         self.path = [self.startNode]
         
@@ -21,7 +22,7 @@ class DSearch():
         self.distFromStart = [1e7] * self.graph.dimension 
         
         
-        if(useHeapAndList):
+        if(useHeap):
             self.queue = HeapQueue()
         else:
             self.queue = ArrayQueue()
@@ -48,7 +49,7 @@ class DSearch():
     ### helper methods
     
     def __getEdgesFrom(self, source:int) -> list[QueueEdge]:
-        if(self.useHeapAndList):
+        if(self.useAdjList):
             return self.adjList[source]
         else:
             # maps from row to col
