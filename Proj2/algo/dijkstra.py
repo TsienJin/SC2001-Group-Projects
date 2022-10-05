@@ -79,6 +79,7 @@ class DSearch():
             nextEdge = self.queue.pop()
             self.visited[nextEdge.sourceNode] = True
             if(self.visited[nextEdge.destNode] == False):
+                self.visited[nextEdge.destNode] = True
                 self.distFromStart[nextEdge.destNode] = self.distFromStart[nextEdge.sourceNode] + nextEdge.weight
                 self.path.append(nextEdge.destNode)
                 self.__insertAdjNodesToQueueFrom(nextEdge.destNode)
