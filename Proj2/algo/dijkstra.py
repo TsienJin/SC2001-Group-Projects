@@ -80,7 +80,6 @@ class DSearch():
             self.visited[nextEdge.sourceNode] = True
             if(self.visited[nextEdge.destNode] == False):
                 self.visited[nextEdge.destNode] = True
-                print("Hello worlds")
                 self.distFromStart[nextEdge.destNode] = self.distFromStart[nextEdge.sourceNode] + nextEdge.weight
                 self.path.append(nextEdge.destNode)
                 self.__insertAdjNodesToQueueFrom(nextEdge.destNode)
