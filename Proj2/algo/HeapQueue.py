@@ -1,3 +1,5 @@
+from logging import root
+import queue
 from algo.Queue import QueueEdge
 
 class HeapQueue():
@@ -15,33 +17,35 @@ class HeapQueue():
         
     def insertEdge(self, edge:QueueEdge):
         self.queue.append(edge)
-            
+       
     # HeapSort Functions
-    def heapify(self, arrLength, LargestDist) -> None:
-        currLargest = LargestDist
-        leftHeap = 2 * LargestDist + 1
-        rightHeap = 2 * LargestDist + 2
+    def heapify(self, arrLength, smallestDist) -> None:
+        rootPos = smallestDist # 2
+        leftPos = 2 * rootPos + 1
+        rightPos = 2 * rootPos + 2
+        currSmallest = rootPos
         
-        if(leftHeap < arrLength and self.queue[leftHeap].weight > self.queue[LargestDist].weight):
-            currLargest = leftHeap
+        if(leftPos < arrLength):
+            if(leftPos < arrLength) and (rightPos < arrLength):
+                currSmallest = self.smallestWt(leftPos, rightPos)
+                if(currSmallest == rightPos):
+                    self.queue[leftPos], self.queue[rightPos] = self.queue[rightPos], self.queue[leftPos]
+                    currSmallest = leftPos
+            currSmallest = self.smallestWt(currSmallest, rootPos)
         
-        if(rightHeap < arrLength and self.queue[rightHeap].weight > self.queue[LargestDist].weight):
-            currLargest = rightHeap
+        if(currSmallest != rootPos):
+            self.queue[rootPos], self.queue[currSmallest] = self.queue[currSmallest], self.queue[rootPos]
+            self.heapify(arrLength, currSmallest)
             
-        if(currLargest != LargestDist):
-            (self.queue[LargestDist], self.queue[currLargest]) = (self.queue[currLargest], self.queue[LargestDist])
-            self.heapify(arrLength, currLargest)
-        
     def heapSort(self) -> None:
         arrLength = len(self.queue)
         
-        for i in range((arrLength // 2) - 1, -1, -1):
+        for i in range(((arrLength // 2) - 1),-1 , -1):
             self.heapify(arrLength, i)
-
-        for i in range(arrLength - 1, 0, -1):
-            (self.queue[i], self.queue[0]) = (self.queue[0], self.queue[i])
-            self.heapify(i, 0)
     
+    def smallestWt(self, first, second):
+        return second if (self.queue[second].weight < self.queue[first].weight) else first
+
     # Uses HeapSort to sort based on weight of edge
     # regardless of source edge
     def pop(self) -> QueueEdge:
