@@ -3,7 +3,7 @@ from test.generateTest import GenerateTest
 from algo.ArrayQueue import ArrayQueue
 
 def debug():
-    obj = GenerateTest(dimension=6, isDirectional=True)
+    obj = GenerateTest(dimension=12, isDirectional=True)
     obj.printBoth()
     
     print("\nArray")
