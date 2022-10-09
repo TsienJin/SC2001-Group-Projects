@@ -14,7 +14,7 @@ class GenerateTest():
         self.isDirectional = isDirectional
         self.minWeight = minWeight
         self.maxWeight = maxWeight
-        self.adjMatrix = np.random.randint(self.minWeight,self.maxWeight, (self.dimension, self.dimension)).tolist()
+        self.adjMatrix = np.random.randint(self.minWeight,self.maxWeight+1, (self.dimension, self.dimension)).tolist()
         self.adjList = {}
         
         # number of vertecies and housekeeping for non-directional graphs

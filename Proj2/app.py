@@ -68,7 +68,7 @@ class Compare():
             
             
     def compareAllNonWeighted(self) -> None:
-        for i in range(1,250):
+        for i in range(1,65):
             jitter = 0
             localDim = i+jitter
             minWeight = 0
@@ -92,4 +92,4 @@ class Compare():
 
 if __name__ == "__main__":
     for i in range(10):
-        Compare().compareAllWeighted()
+        Compare().compareAllNonWeighted()
