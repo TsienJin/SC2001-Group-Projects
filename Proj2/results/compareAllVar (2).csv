@@ -1,4 +1,4 @@
-
+dimension,edges,isDirectional,minWeight,maxWeight,queue,graphInput,time
 1,0,False,0,50,heap,adjList,0.0
 1,0,False,0,50,heap,adjMatrix,0.0
 1,0,False,0,50,array,adjList,0.0
