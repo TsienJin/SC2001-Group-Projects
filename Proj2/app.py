@@ -6,7 +6,6 @@ from test.generateTest import GenerateTest
 
 class Compare():
     def __init__(self) -> None:
-        self.name = 'hello'
         self.resultFolder = "./results/"
         
     def __timeIt(self, func) -> int:
@@ -46,27 +45,51 @@ class Compare():
             
             self.__writeResults(outputFile="compareLargeRangeUndirected_ZY.csv", outputStr=f"\n{localDim},{testGraph.edges},{False},{minWeight},{maxWeight},dHeapNList,{timeHNL}")
             self.__writeResults(outputFile="compareLargeRangeUndirected_ZY.csv", outputStr=f"\n{localDim},{testGraph.edges},{False},{minWeight},{maxWeight},dNormal,{timeNorm}")
-            
+    
+    def __templateTester(self, graph:GenerateTest, startNode:int=0, outputFile:str=f"result_{time.time()}.csv"):
+        binArr = [True, False]
+        for isHeap in binArr:
+            for isAdjList in binArr:
+                curDijkstra = DSearch(graph=graph, startNode=0, useHeap=isHeap, useAdjList=isAdjList)
+                curTime = self.__timeIt(lambda: curDijkstra.solve())
+                self.__writeResults(outputFile=f"{outputFile}", outputStr=f"\n{graph.dimension},{graph.edges},{graph.isDirectional},{graph.minWeight},{graph.maxWeight},{'heap' if isHeap else 'array'},{'adjList' if isAdjList else 'adjMatrix'},{curTime}")
+
+        
             
     def compareAllVar(self) -> None:
-        for i in range(1, 50):
+        for i in range(1, 51):
             jitter = 0 #random.randrange(-25, 25)
             localDim = i+jitter
             minWeight = 0
             maxWeight = 50
             testGraph = GenerateTest(dimension=localDim, isDirectional=False, minWeight=minWeight, maxWeight=maxWeight)
             
-            ### Creating testing object
-            binArr = [True, False]
-            for isHeap in binArr:
-                for isAdjList in binArr:
-                    curDijkstra = DSearch(graph=testGraph, startNode=0, useHeap=isHeap, useAdjList=isAdjList)
-                    curTime = self.__timeIt(lambda: curDijkstra.solve())
-                    self.__writeResults(outputFile="compareAllVar.csv", outputStr=f"\n{testGraph.dimension},{testGraph.edges},{testGraph.isDirectional},{minWeight},{maxWeight},{'heap' if isHeap else 'array'},{'adjList' if isAdjList else 'adjMatrix'},{curTime}")
+            self.__templateTester(graph=testGraph, outputFile="compareAllVar.csv")
+            
+            
+    def compareAllNonWeighted(self) -> None:
+        for i in range(1,250):
+            jitter = 0
+            localDim = i+jitter
+            minWeight = 0
+            maxWeight = 1
+            testGraph = GenerateTest(dimension=localDim, isDirectional=False, minWeight=minWeight, maxWeight=maxWeight)
+            
+            self.__templateTester(graph=testGraph, outputFile="CompareAllNonWeighted.csv")
+            
+    def compareAllWeighted(self) -> None:
+        for i in range(1, 65):
+            jitter = 0
+            localDim = jitter+i
+            minWeight = 1
+            maxWeight = 50
+            testGraph = GenerateTest(dimension=localDim, isDirectional=False, minWeight=minWeight, maxWeight=maxWeight)
 
+            self.__templateTester(graph=testGraph, outputFile="CompareAllWeighted.csv")
+            
 
 
 
 if __name__ == "__main__":
-    for i in range(100):
-        Compare().compareAllVar()
+    for i in range(10):
+        Compare().compareAllWeighted()
