@@ -82,15 +82,5 @@ class HeapQueue():
         if(minEdge != None):
             self.queue.remove(minEdge)
         
-        return minEdgeinEdge = None
-        
-        if(not self.isEmpty()):
-            for edge in self.queue:
-                if(edge.sourceNode==source and (minEdge==None or edge.weight<minEdge.weight)):
-                    minEdge = edge
-            
-        if(minEdge != None):
-            self.queue.remove(minEdge)
-        
         return minEdge
     
