@@ -109,5 +109,7 @@ def testLargeAll():
 
 
 if __name__ == "__main__":
-    testLargeAll()
+    for i in range(5):
+        testLargeAll()
+        testSmallAll()
     
