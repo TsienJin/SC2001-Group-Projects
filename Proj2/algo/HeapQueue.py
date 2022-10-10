@@ -52,7 +52,7 @@ class HeapQueue():
                 self.downHeap(minNode)
     
     def smallestWt(self, first, second):
-        return second if (self.queue[second].weight < self.queue[first].weight) else first
+        return second if (self.queue[second].weight <= self.queue[first].weight) else first
 
     # Uses HeapSort to sort based on weight of edge
     # regardless of source edge
