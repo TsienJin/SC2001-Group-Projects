@@ -16,7 +16,7 @@ class Compare():
         return (endTime-startTime)*1000 # returns time elapsed in ms
     
     def __writeResults(self, outputFile:str, outputStr:str) -> None:
-        # print(outputStr)
+        print(outputStr[1:])
         with open(self.resultFolder+outputFile, 'a') as f:
             f.write(outputStr)
         return
@@ -56,10 +56,10 @@ class Compare():
 
         
             
-    def compareAllVar(self, minDim:int=1, maxDim:int=100, jump:int=1) -> None:
+    def compareAllVar(self, minDim:int=1, maxDim:int=100, jump:int=1, jitter:int=0, minWeight:int=0, maxWeight:int=50) -> None:
         for i in range(minDim, maxDim, jump):
-            jitter = 0 #random.randrange(-25, 25)
-            localDim = i+jitter
+            jitter_ = random.randrange(0, jitter+1)
+            localDim = i+jitter_
             minWeight = 0
             maxWeight = 50
             testGraph = GenerateTest(dimension=localDim, isDirectional=False, minWeight=minWeight, maxWeight=maxWeight)
@@ -67,20 +67,20 @@ class Compare():
             self.__templateTester(graph=testGraph, outputFile="compareAllVar.csv")
             
             
-    def compareAllNonWeighted(self, minDim:int=1, maxDim:int=100, jump:int=1) -> None:
+    def compareAllNonWeighted(self, minDim:int=1, maxDim:int=100, jump:int=1, jitter:int=0) -> None:
         for i in range(minDim,maxDim, jump):
-            jitter = 0
-            localDim = i+jitter
+            jitter_ = random.randrange(0, jitter+1)
+            localDim = i+jitter_
             minWeight = 0
             maxWeight = 1
             testGraph = GenerateTest(dimension=localDim, isDirectional=False, minWeight=minWeight, maxWeight=maxWeight)
             
             self.__templateTester(graph=testGraph, outputFile="CompareAllNonWeighted.csv")
             
-    def compareAllWeighted(self, minDim:int=1, maxDim:int=100, jump:int=1) -> None:
+    def compareAllWeighted(self, minDim:int=1, maxDim:int=100, jump:int=1, jitter:int=0) -> None:
         for i in range(minDim, maxDim, jump):
-            jitter = 0
-            localDim = jitter+i
+            jitter_ = random.randrange(0, jitter+1)
+            localDim = jitter_+i
             minWeight = 1
             maxWeight = 50
             testGraph = GenerateTest(dimension=localDim, isDirectional=False, minWeight=minWeight, maxWeight=maxWeight)
@@ -106,10 +106,18 @@ def testLargeAll():
         Compare().compareAllNonWeighted(minDim=100,maxDim=251,jump=10)
         Compare().compareAllWeighted(minDim=100,maxDim=251,jump=10)
         Compare().compareAllVar(minDim=100,maxDim=251,jump=10)
-
-
+        
+def testExtremeLarge():
+    for i in range(10):
+        print(f"Run: {i+1}")
+        Compare().compareAllNonWeighted(minDim=100,maxDim=1501,jump=50, jitter=50)
+        Compare().compareAllWeighted(minDim=100,maxDim=1501,jump=50, jitter=50)
+        Compare().compareAllVar(minDim=100,maxDim=1501,jump=50, jitter=50)
+        
 if __name__ == "__main__":
     for i in range(5):
         # testLargeAll()
-        testSmallAll()
+        # testSmallAll()
+        testExtremeLarge()
+        
     
