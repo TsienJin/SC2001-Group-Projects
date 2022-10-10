@@ -1,8 +1,7 @@
-from asyncio.windows_events import NULL
 from algo.ArrayQueue import ArrayQueue
 from algo.HeapQueue import HeapQueue
 from algo.Queue import QueueEdge
-from algo.GenerateTest import GenerateTest
+from test.generateTest import GenerateTest
 
 class DSearch():
     def __init__(self, graph:GenerateTest, startNode:int=0, useHeap:bool=False, useAdjList:bool=False) -> None:
@@ -22,7 +21,7 @@ class DSearch():
         # i'th index is the distance of i'th node from start node
         self.distFromStart = [1e7] * self.graph.dimension 
         
-        self.pi = [NULL] * self.graph.dimension
+        self.pi = [1e7] * self.graph.dimension
 
         if(useHeap):
             self.queue = HeapQueue()
