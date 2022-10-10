@@ -11,8 +11,8 @@ class ArrayQueue():
     def isEmpty(self) -> bool:
         return len(self.queue) == 0
 
-    def insert(self, sourceNode:int, destNode:int, weight:int=0) -> None:
-        self.queue.append(QueueEdge(sourceNode=sourceNode, destNode=destNode, weight=weight))
+    def insert(self, sourceNode:int, destNode:int, weight:int, distFromStart:int) -> None:
+        self.queue.append(QueueEdge(sourceNode=sourceNode, destNode=destNode, weight=weight, distFromStart=distFromStart))
         
     def insertEdge(self, edge:QueueEdge):
         self.queue.append(edge)
@@ -24,7 +24,7 @@ class ArrayQueue():
         if(not self.isEmpty()):
             minEdge = self.queue[0] 
             for edge in self.queue:
-                if edge.weight < minEdge.weight:
+                if edge.distFromStart < minEdge.distFromStart:
                     minEdge = edge
             self.queue.remove(minEdge)
             return minEdge
@@ -40,7 +40,7 @@ class ArrayQueue():
         
         if(not self.isEmpty()):
             for edge in self.queue:
-                if(edge.sourceNode==source and (minEdge==None or edge.weight<minEdge.weight)):
+                if(edge.sourceNode==source and (minEdge==None or edge.distFromStart<minEdge.distFromStart)):
                     minEdge = edge
             
         if(minEdge != None):

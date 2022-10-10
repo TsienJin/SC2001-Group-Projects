@@ -61,7 +61,7 @@ class DSearch():
         
     def __insertAdjNodesToQueueFrom(self, source:int) -> None:
         for edge in self.__getEdgesFrom(source):
-            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1])
+            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1], distFromStart=(self.distFromStart[source] + edge[1]))
     
     
     
@@ -70,16 +70,14 @@ class DSearch():
     def __dijkstra(self) -> None:
         # init arrays for starting node
         self.distFromStart[self.startNode] = 0
-        self.visited[self.startNode] = True
-        
+                
         # add starting node to the queue
         self.__insertAdjNodesToQueueFrom(self.startNode)
         
         while not self.queue.isEmpty():
             nextEdge = self.queue.pop()
             self.visited[nextEdge.sourceNode] = True
-            if(self.visited[nextEdge.destNode] == False):
-                self.visited[nextEdge.destNode] = True
+            if(self.visited[nextEdge.destNode] == False and self.distFromStart[nextEdge.destNode] > self.distFromStart[nextEdge.sourceNode] + nextEdge.weight):
                 self.distFromStart[nextEdge.destNode] = self.distFromStart[nextEdge.sourceNode] + nextEdge.weight
                 self.path.append(nextEdge.destNode)
                 self.__insertAdjNodesToQueueFrom(nextEdge.destNode)
