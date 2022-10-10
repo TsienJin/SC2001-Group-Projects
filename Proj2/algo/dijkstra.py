@@ -1,7 +1,9 @@
+from asyncio.windows_events import NULL
+from re import U
 from algo.ArrayQueue import ArrayQueue
 from algo.HeapQueue import HeapQueue
 from algo.Queue import QueueEdge
-from test.generateTest import GenerateTest
+from algo.GenerateTest import GenerateTest
 
 class DSearch():
     def __init__(self, graph:GenerateTest, startNode:int=0, useHeap:bool=False, useAdjList:bool=False) -> None:
@@ -21,7 +23,8 @@ class DSearch():
         # i'th index is the distance of i'th node from start node
         self.distFromStart = [1e7] * self.graph.dimension 
         
-        
+        self.pi = [NULL] * self.graph.dimension
+
         if(useHeap):
             self.queue = HeapQueue()
         else:
@@ -61,8 +64,7 @@ class DSearch():
         
     def __insertAdjNodesToQueueFrom(self, source:int) -> None:
         for edge in self.__getEdgesFrom(source):
-            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1], distFromStart=(self.distFromStart[source] + edge[1]))
-    
+            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1])
     
     
     
@@ -70,14 +72,29 @@ class DSearch():
     def __dijkstra(self) -> None:
         # init arrays for starting node
         self.distFromStart[self.startNode] = 0
-                
+        self.visited[self.startNode] = True
+
         # add starting node to the queue
         self.__insertAdjNodesToQueueFrom(self.startNode)
-        
         while not self.queue.isEmpty():
+            #print("\nQueue elements\n", self.queue)
+            #print("\nDist From Start\n", self.distFromStart)
             nextEdge = self.queue.pop()
-            self.visited[nextEdge.sourceNode] = True
-            if(self.visited[nextEdge.destNode] == False and self.distFromStart[nextEdge.destNode] > self.distFromStart[nextEdge.sourceNode] + nextEdge.weight):
-                self.distFromStart[nextEdge.destNode] = self.distFromStart[nextEdge.sourceNode] + nextEdge.weight
-                self.path.append(nextEdge.destNode)
-                self.__insertAdjNodesToQueueFrom(nextEdge.destNode)
+            u = nextEdge.destNode
+            if(self.visited[u] == False): #only add the node to the solution is visited is false
+                self.visited[u] = True
+                self.pi[u] = nextEdge.sourceNode
+                self.distFromStart[u] = nextEdge.weight
+                self.path.append(u)
+
+                for edge in self.__getEdgesFrom(u):
+                    v = edge[0]
+                    vWeight = edge[1]
+                    if(self.visited[v] == False
+                        and self.distFromStart[v] > 
+                            self.distFromStart[u] + vWeight):
+                        self.distFromStart[v] = self.distFromStart[u] + vWeight
+                        self.pi[v] = u
+                        self.queue.insert(u, v, self.distFromStart[v])
+
+                
