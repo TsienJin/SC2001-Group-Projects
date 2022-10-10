@@ -56,7 +56,7 @@ class Compare():
 
         
             
-    def compareAllVar(self, minDim:int=1, maxDim:int=65, jump:int=1) -> None:
+    def compareAllVar(self, minDim:int=1, maxDim:int=100, jump:int=1) -> None:
         for i in range(minDim, maxDim, jump):
             jitter = 0 #random.randrange(-25, 25)
             localDim = i+jitter
@@ -67,7 +67,7 @@ class Compare():
             self.__templateTester(graph=testGraph, outputFile="compareAllVar.csv")
             
             
-    def compareAllNonWeighted(self, minDim:int=1, maxDim:int=65, jump:int=1) -> None:
+    def compareAllNonWeighted(self, minDim:int=1, maxDim:int=100, jump:int=1) -> None:
         for i in range(minDim,maxDim, jump):
             jitter = 0
             localDim = i+jitter
@@ -77,7 +77,7 @@ class Compare():
             
             self.__templateTester(graph=testGraph, outputFile="CompareAllNonWeighted.csv")
             
-    def compareAllWeighted(self, minDim:int=1, maxDim:int=65, jump:int=1) -> None:
+    def compareAllWeighted(self, minDim:int=1, maxDim:int=100, jump:int=1) -> None:
         for i in range(minDim, maxDim, jump):
             jitter = 0
             localDim = jitter+i
@@ -110,6 +110,6 @@ def testLargeAll():
 
 if __name__ == "__main__":
     for i in range(5):
-        testLargeAll()
+        # testLargeAll()
         testSmallAll()
     
