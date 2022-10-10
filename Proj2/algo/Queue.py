@@ -1,11 +1,10 @@
 
 
 class QueueEdge():
-    def __init__(self, sourceNode:int, destNode:int, weight:int, distFromStart:int):
+    def __init__(self, sourceNode:int, destNode:int, weight:int):
         self.sourceNode = sourceNode
         self.destNode = destNode
         self.weight = weight
-        self.distFromStart = distFromStart
         
     def __str__(self) -> str:
         return f"src:{self.sourceNode}\tdest:{self.destNode}\tweight:{self.weight}\tdistFromStart:{self.distFromStart}"
