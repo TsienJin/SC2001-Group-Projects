@@ -12,9 +12,8 @@ class HeapQueue():
     def isEmpty(self) -> bool:
         return len(self.queue) == 0
 
-
-    def insert(self, sourceNode:int, destNode:int, weight:int, distFromStart:int) -> None:
-        self.queue.append(QueueEdge(sourceNode=sourceNode, destNode=destNode, weight=weight, distFromStart=distFromStart))
+    def insert(self, sourceNode:int, destNode:int, weight:int=0) -> None:
+        self.queue.append(QueueEdge(sourceNode=sourceNode, destNode=destNode, weight=weight))
         self.upHeap(len(self.queue)-1)
         
     def insertEdge(self, edge:QueueEdge):
@@ -53,7 +52,7 @@ class HeapQueue():
                 self.downHeap(minNode)
     
     def smallestWt(self, first, second):
-        return second if (self.queue[second].distFromStart < self.queue[first].distFromStart) else first
+        return second if (self.queue[second].weight < self.queue[first].weight) else first
 
     # Uses HeapSort to sort based on weight of edge
     # regardless of source edge
@@ -69,19 +68,3 @@ class HeapQueue():
         else: 
             return None
         
-    # iterates over entire queue to find the lowest weightage edge
-    # with respect to source edge
-    def popFrom(self, source:int):
-        
-        minEdge = None
-        
-        if(not self.isEmpty()):
-            for edge in self.queue:
-                if(edge.sourceNode==source and (minEdge==None or edge.distFromStart<minEdge.distFromStart)):
-                    minEdge = edge
-            
-        if(minEdge != None):
-            self.queue.remove(minEdge)
-        
-        return minEdge
-    
