@@ -16,7 +16,7 @@ class Compare():
         return (endTime-startTime)*1000 # returns time elapsed in ms
     
     def __writeResults(self, outputFile:str, outputStr:str) -> None:
-        print(outputStr)
+        # print(outputStr)
         with open(self.resultFolder+outputFile, 'a') as f:
             f.write(outputStr)
         return
@@ -56,8 +56,8 @@ class Compare():
 
         
             
-    def compareAllVar(self) -> None:
-        for i in range(1, 51):
+    def compareAllVar(self, minDim:int=1, maxDim:int=65, jump:int=1) -> None:
+        for i in range(minDim, maxDim, jump):
             jitter = 0 #random.randrange(-25, 25)
             localDim = i+jitter
             minWeight = 0
@@ -67,8 +67,8 @@ class Compare():
             self.__templateTester(graph=testGraph, outputFile="compareAllVar.csv")
             
             
-    def compareAllNonWeighted(self) -> None:
-        for i in range(1,65):
+    def compareAllNonWeighted(self, minDim:int=1, maxDim:int=65, jump:int=1) -> None:
+        for i in range(minDim,maxDim, jump):
             jitter = 0
             localDim = i+jitter
             minWeight = 0
@@ -77,8 +77,8 @@ class Compare():
             
             self.__templateTester(graph=testGraph, outputFile="CompareAllNonWeighted.csv")
             
-    def compareAllWeighted(self) -> None:
-        for i in range(1, 65):
+    def compareAllWeighted(self, minDim:int=1, maxDim:int=65, jump:int=1) -> None:
+        for i in range(minDim, maxDim, jump):
             jitter = 0
             localDim = jitter+i
             minWeight = 1
@@ -90,7 +90,24 @@ class Compare():
 
 
 
-if __name__ == "__main__":
 
+
+### testing
+def testSmallAll():
     for i in range(10):
+        print(f"Run: {i+1}")
         Compare().compareAllNonWeighted()
+        Compare().compareAllWeighted()
+        Compare().compareAllVar()
+
+def testLargeAll():
+    for i in range(5):
+        print(f"Run: {i+1}")
+        Compare().compareAllNonWeighted(minDim=100,maxDim=251,jump=10)
+        Compare().compareAllWeighted(minDim=100,maxDim=251,jump=10)
+        Compare().compareAllVar(minDim=100,maxDim=251,jump=10)
+
+
+if __name__ == "__main__":
+    testLargeAll()
+    
