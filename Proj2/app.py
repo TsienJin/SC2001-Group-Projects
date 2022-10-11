@@ -87,6 +87,11 @@ class Compare():
 
             self.__templateTester(graph=testGraph, outputFile="CompareAllWeighted.csv")
             
+    def compareCrossOver(self, dim:int=700, maxWeight:int=50):
+        for maxWeight in range(0, maxWeight+1):
+            testGraph = GenerateTest(dimension=dim, isDirectional=False, minWeight=0, maxWeight=maxWeight)
+            self.__templateTester(graph=testGraph, outputFile="compareCrossOver.csv")
+            
 
 
 
@@ -114,10 +119,16 @@ def testExtremeLarge():
         Compare().compareAllWeighted(minDim=100,maxDim=1501,jump=50, jitter=50)
         Compare().compareAllVar(minDim=100,maxDim=1501,jump=50, jitter=50)
         
+def testCrossOver():
+    for i in range(10):
+        print(f"Run: {i+1}")
+        Compare().compareCrossOver()
+        
 if __name__ == "__main__":
     for i in range(5):
         # testLargeAll()
         # testSmallAll()
-        testExtremeLarge()
+        # testExtremeLarge()
+        testCrossOver()
         
     
