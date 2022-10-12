@@ -62,7 +62,14 @@ class DSearch():
         
     def __insertAdjNodesToQueueFrom(self, source:int) -> None:
         for edge in self.__getEdgesFrom(source):
-            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1])
+            dest = edge[0]
+            vWeight = edge[1]
+            if(self.visited[dest] == False
+                and self.distFromStart[dest] > 
+                    self.distFromStart[source] + vWeight):
+                self.distFromStart[dest] = self.distFromStart[source] + vWeight
+                self.pi[dest] = source
+                self.queue.insert(source, dest, self.distFromStart[dest])
     
     
     
@@ -75,24 +82,18 @@ class DSearch():
         # add starting node to the queue
         self.__insertAdjNodesToQueueFrom(self.startNode)
         while not self.queue.isEmpty():
-            #print("\nQueue elements\n", self.queue)
-            #print("\nDist From Start\n", self.distFromStart)
             nextEdge = self.queue.pop()
             u = nextEdge.destNode
-            if(self.visited[u] == False): #only add the node to the solution is visited is false
+            
+            #only add the node to the solution is visited is false
+            if(self.visited[u] == False): 
                 self.visited[u] = True
                 self.pi[u] = nextEdge.sourceNode
                 self.distFromStart[u] = nextEdge.weight
                 self.path.append(u)
+                
+                self.__insertAdjNodesToQueueFrom(u)
 
-                for edge in self.__getEdgesFrom(u):
-                    v = edge[0]
-                    vWeight = edge[1]
-                    if(self.visited[v] == False
-                        and self.distFromStart[v] > 
-                            self.distFromStart[u] + vWeight):
-                        self.distFromStart[v] = self.distFromStart[u] + vWeight
-                        self.pi[v] = u
-                        self.queue.insert(u, v, self.distFromStart[v])
+                
 
                 
