@@ -62,17 +62,8 @@ class DSearch():
         
     def __insertAdjNodesToQueueFrom(self, source:int) -> None:
         for edge in self.__getEdgesFrom(source):
-            dest = edge[0]
-            vWeight = edge[1]
-            if(self.visited[dest] == False
-                and self.distFromStart[dest] > 
-                    self.distFromStart[source] + vWeight):
-                self.distFromStart[dest] = self.distFromStart[source] + vWeight
-                self.pi[dest] = source
-                self.queue.insert(source, dest, self.distFromStart[dest])
-    
-    
-    
+            self.queue.insert(sourceNode=source, destNode=edge[0], weight=edge[1])   
+
     ### Dijkstra methods
     def __dijkstra(self) -> None:
         # init arrays for starting node
@@ -81,7 +72,7 @@ class DSearch():
 
         # add starting node to the queue
         self.__insertAdjNodesToQueueFrom(self.startNode)
-        print("Priority Queue (After running InsertAdj):\n{}\n==========".format(self.queue))
+        print("Priority Queue (After running InsertAdj):\n==========\n{}\n==========".format(self.queue))
         while not self.queue.isEmpty():
             nextEdge = self.queue.pop()
             print("\nNextEdge: {}\n".format(nextEdge))
@@ -94,9 +85,15 @@ class DSearch():
                 self.pi[u] = nextEdge.sourceNode
                 self.distFromStart[u] = nextEdge.weight
                 self.path.append(u)
-                
-                self.__insertAdjNodesToQueueFrom(u)
+                print("Distance From Start Array: {}".format(self.distFromStart))
 
-                
-
-                
+                for edge in self.__getEdgesFrom(u):
+                    v = edge[0]
+                    vWeight = edge[1]
+                    if(self.visited[v] == False
+                        and self.distFromStart[v] > 
+                            self.distFromStart[u] + vWeight):
+                        self.distFromStart[v] = self.distFromStart[u] + vWeight
+                        self.pi[v] = u
+                        self.queue.insert(u, v, self.distFromStart[v])
+            print("Priority Queue (Before Retrieving NextEdge):\n==========\n{}\n==========".format(self.queue))
