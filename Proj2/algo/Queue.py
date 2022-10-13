@@ -7,7 +7,7 @@ class QueueEdge():
         self.weight = weight
         
     def __str__(self) -> str:
-        return f"src:{self.sourceNode}\tdest:{self.destNode}\tweight:{self.weight}\tdistFromStart:{self.distFromStart}"
+        return f"src:{self.sourceNode}\tdest:{self.destNode}\tweight:{self.weight}"
 
 
 

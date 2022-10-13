@@ -4,7 +4,13 @@ from algo.ArrayQueue import ArrayQueue
 
 def debug():
 
-    obj = GenerateTest(dimension=6, isDirectional=True, minWeight=0, maxWeight=1)
+    obj = GenerateTest(dimension=5, isDirectional=True, minWeight=0, maxWeight=1)
+    obj.adjMatrix = [[0, 10, 3, 0, 0],
+                     [0, 0, 1, 2, 0],
+                     [0, 4, 0, 8, 2],
+                     [0, 0, 0, 0, 7],
+                     [0, 0, 0, 9, 0]]
+    obj.adjList = obj.matrixToList()
     obj.printBoth()
     
     print("\nArray")

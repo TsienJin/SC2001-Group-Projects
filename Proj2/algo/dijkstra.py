@@ -81,8 +81,11 @@ class DSearch():
 
         # add starting node to the queue
         self.__insertAdjNodesToQueueFrom(self.startNode)
+        print("Priority Queue (After running InsertAdj):\n{}\n==========".format(self.queue))
         while not self.queue.isEmpty():
             nextEdge = self.queue.pop()
+            print("\nNextEdge: {}\n".format(nextEdge))
+            print("Priority Queue (After removing smallest weight):\n==========\n{}\n==========".format(self.queue))
             u = nextEdge.destNode
             
             #only add the node to the solution is visited is false

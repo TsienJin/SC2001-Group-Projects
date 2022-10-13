@@ -21,10 +21,10 @@ class GenerateTest():
         self.edges = self.__refactorAndCount()
         
         # convert matrix to list 
-        self.adjList = self.__matrixToList()
+        #self.adjList = self.__matrixToList()
         
     #added adjMatrix -> list method 
-    def __matrixToList(self): 
+    def matrixToList(self): 
         adjList = {}
         for i in range(self.dimension):
             adjList[i] = []  
