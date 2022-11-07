@@ -44,6 +44,7 @@ class knap():
                 children.append(self.__recursive(capacity=capacity-self.weight[item]) + self.profit[item])
             
         # returns max value from children + value of item
+        print(children)
         return max(children)
     
     
@@ -78,6 +79,10 @@ class knap():
         
         for cap in range(self.capacity+1):
             for item in range(self.items):
+                arr = ""
+                for i in self.memBU:
+                    arr += "{}, ".format(i)
+                print(arr)
                 if(cap>self.weight[item]): 
                     self.memBU[cap] = max(self.memBU[cap], self.memBU[cap-self.weight[item]]+self.profit[item])
         
