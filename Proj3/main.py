@@ -3,7 +3,7 @@
 from app import knap
 
 def main() -> None:
-    first = knap(capacity=15, weight=[4,6,8], profit=[7,6,9])
+    first = knap(capacity=14, weight=[4,6,8], profit=[7,6,9])
     print("The Score of C:14, W:[4,6,8], P:[7,6,9] via Recursive: {}".format(first.recursive()))
     print("The Score of C:14, W:[4,6,8], P:[7,6,9] via TopDown: {}".format(first.dpTopDown()))
     print("The Score of C:14, W:[4,6,8], P:[7,6,9] via BottomUp: {}".format(first.dpBottomUp()))
