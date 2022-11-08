@@ -83,7 +83,7 @@ class knap():
                 for i in self.memBU:
                     arr += "{}, ".format(i)
                 print(arr)
-                if(cap>self.weight[item]): 
+                if(cap>=self.weight[item]): 
                     self.memBU[cap] = max(self.memBU[cap], self.memBU[cap-self.weight[item]]+self.profit[item])
         
         return self.memBU[self.capacity]
