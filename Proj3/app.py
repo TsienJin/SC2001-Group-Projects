@@ -77,14 +77,14 @@ class knap():
         
     def dpBottomUp(self) -> int: # memoization from a bottom up dp approach
         
-        for cap in range(self.capacity+1):
+        for cap in range(1, self.capacity+1):
             for item in range(self.items):
-                arr = ""
-                for i in self.memBU:
-                    arr += "{}, ".format(i)
-                print(arr)
+                # arr = ""
+                # for i in self.memBU:
+                #     arr += "{}, ".format(i)
+                # print(arr)
                 if(cap>=self.weight[item]): 
-                    self.memBU[cap] = max(self.memBU[cap], self.memBU[cap-self.weight[item]]+self.profit[item])
+                    self.memBU[cap] = max(self.memBU[cap], self.memBU[cap-1], self.memBU[cap-self.weight[item]]+self.profit[item])
         
         return self.memBU[self.capacity]
 
